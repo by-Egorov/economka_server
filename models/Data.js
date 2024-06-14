@@ -3,38 +3,32 @@ import mongoose from 'mongoose'
 const DataSchema = new mongoose.Schema({
 	me: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Me',
+			type: Number,
 		},
 	],
 	car: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Car',
+			type: Number,
 		},
 	],
 	daughter: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Daughter',
+			type: Number,
 		},
 	],
 	things: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Things',
+			type: Number,
 		},
 	],
 	wife: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Wife',
+			type: Number,
 		},
 	],
 	products: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Product',
+			type: Number,
 		},
 	],
 })
