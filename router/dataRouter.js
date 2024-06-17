@@ -6,7 +6,8 @@ import {
 	register,
 	updateUserData,
 } from '../controllers/dataController.js'
-import authMiddleware from '../middleware/AuthMiddleware.js'
+import authMiddleware from '/opt/render/project/src/middleware/AuthMiddleware.js'
+
 
 const router = new Router()
 
