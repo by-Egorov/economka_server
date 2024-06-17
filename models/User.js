@@ -11,10 +11,48 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: true
 		},
-		data: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Data'
-		}
+		products: [
+			{
+				price: {
+					type: Number
+				}
+			}
+		],
+		me: [
+			{
+				price: {
+					type: Number
+				}
+			}
+		],
+		wife: [
+			{
+				price: {
+					type: Number
+				}
+			}
+		],
+		things: [
+			{
+				price: {
+					type: Number
+				}
+			}
+		],
+		daughter: [
+			{
+				price: {
+					type: Number
+				}
+			}
+		],
+		car: [
+			{
+				price: {
+					type: Number
+				}
+			}
+		],
 	}
 )
 

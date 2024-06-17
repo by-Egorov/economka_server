@@ -4,7 +4,9 @@ import {
 	getUser,
 	login,
 	register,
+	updateUserData,
 } from '../controllers/dataController.js'
+import authMiddleware from '../middleware/AuthMiddleware.js'
 
 const router = new Router()
 
@@ -31,7 +33,8 @@ router.post(
 	login
 )
 
-router.get('/user/:id', getUser)
+router.get('/user', authMiddleware, getUser)
+router.put('/user/upd', authMiddleware, updateUserData)
 
 // router.post('/data/price/:id', addPrice)
 

@@ -15,6 +15,13 @@ export const register = async (req, res) => {
 	try {
 		const { email, password, data } = req.body
 
+		// Проверка существования пользователя
+		const existingUser = await User.findOne({ email })
+		if (existingUser) {
+			return res
+				.status(409)
+				.json({ message: 'Пользователь с таким email уже существует' })
+		}
 		const userDataI = new Data(data)
 		await userDataI.save()
 
@@ -81,18 +88,46 @@ export const login = async (req, res) => {
 //getUser
 export const getUser = async (req, res) => {
 	try {
-		const { id } = req.params
-		const user = await User.findById(id).populate('data')
-
-		if (!user) {
-			res.ststus(400).json({
-				message: 'User not found',
-			})
+		if (!req.user || !req.user.id) {
+			return res.status(401).json({ error: 'Пользователь не авторизован' })
 		}
-		res.status(200).json(user)
+
+		const userId = req.user.id
+		const user = await User.findById(userId)
+		return res.json(user)
 	} catch (error) {
 		console.warn(error)
-		res.status(500).json({ message: 'Error fetching user' })
+		res.status(401).json({ error: 'Пользователь не авторизован' })
+	}
+}
+//Update User
+export const updateUserData = async (req, res) => {
+	const userId = req.user.id
+	const { arrayName, price } = req.body
+	try {
+		let updateObject = {}
+
+		switch (arrayName) {
+			case 'products':
+			case 'me':
+			case 'wife':
+			case 'car':
+			case 'things':
+			case 'wife':
+				updateObject = { $addToSet: { [arrayName]: { price } } }
+				break
+			default:
+				return res.status(400).json({ error: 'Некорректный тип массива' })
+		}
+		const user = await User.findByIdAndUpdate(userId, updateObject, {
+			new: true,
+		})
+		res.json({
+			message: 'Done!'
+		})
+	} catch (error) {
+		console.error('Ошибка при обновлении данных пользователя:', error)
+		res.status(500).json({ error: 'Ошибка при обновлении данных пользователя' })
 	}
 }
 

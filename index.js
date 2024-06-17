@@ -15,7 +15,7 @@ mongoose
 		`mongodb+srv://${user}:${password}@cluster0.5qqffmc.mongodb.net/${db}?retryWrites=true&w=majority`
 	)
 	.then(() => console.log('DB ok'))
-	.catch(() => console.log('DB error', err))
+	.catch(() => console.log('DB error'))
 
 server.use(express.json())
 server.use(cors())
