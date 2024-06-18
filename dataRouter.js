@@ -5,8 +5,8 @@ import {
 	login,
 	register,
 	updateUserData,
-} from '../controllers/dataController.js'
-import AuthMiddleware from '../middleware/AuthMiddleware.js'
+} from './controllers/dataController.js'
+import AuthMiddleware from './middleware/AuthMiddleware.js'
 
 
 

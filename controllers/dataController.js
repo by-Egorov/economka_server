@@ -122,7 +122,7 @@ export const updateUserData = async (req, res) => {
 		const user = await User.findByIdAndUpdate(userId, updateObject, {
 			new: true,
 		})
-		res.json({
+		res.json(user, {
 			message: 'Done!'
 		})
 	} catch (error) {
