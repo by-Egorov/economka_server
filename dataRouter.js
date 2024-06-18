@@ -6,7 +6,7 @@ import {
 	register,
 	updateUserData,
 } from './controllers/dataController.js'
-import AuthMiddleware from './middleware/AuthMiddleware.js'
+import AuthMiddleware from './AuthMiddleware.js'
 
 
 
