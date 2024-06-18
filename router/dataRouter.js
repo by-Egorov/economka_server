@@ -6,6 +6,7 @@ import {
 	register,
 	updateUserData,
 } from '../controllers/dataController.js'
+import authMiddleware from '../middleware/AuthMiddleware.js'
 
 
 
@@ -34,8 +35,8 @@ router.post(
 	login
 )
 
-router.get('/user',  getUser)
-router.put('/user/upd', updateUserData)
+router.get('/user', authMiddleware,  getUser)
+router.put('/user/upd', authMiddleware, updateUserData)
 
 // router.post('/data/price/:id', addPrice)
 
