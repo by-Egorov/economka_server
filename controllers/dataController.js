@@ -105,26 +105,21 @@ export const updateUserData = async (req, res) => {
 	const userId = req.user.id
 	const { arrayName, price } = req.body
 	try {
-		let updateObject = {}
-
-		switch (arrayName) {
-			case 'products':
-			case 'me':
-			case 'wife':
-			case 'car':
-			case 'things':
-			case 'wife':
-				updateObject = { $addToSet: { [arrayName]: { price } } }
-				break
-			default:
-				return res.status(400).json({ error: 'Некорректный тип массива' })
+		if (
+			!['products', 'me', 'wife', 'car', 'things', 'daughter'].includes(
+				arrayName
+			)
+		) {
+			console.error('Некорректный тип массива:', arrayName)
+			return res.status(400).json({ error: 'Некорректный тип массива' })
 		}
+
+		const updateObject = { $addToSet: { [arrayName]: { price } } }
+
 		const user = await User.findByIdAndUpdate(userId, updateObject, {
 			new: true,
 		})
-		res.json(user, {
-			message: 'Done!'
-		})
+		res.json({ user, message: 'Done!' })
 	} catch (error) {
 		console.error('Ошибка при обновлении данных пользователя:', error)
 		res.status(500).json({ error: 'Ошибка при обновлении данных пользователя' })
