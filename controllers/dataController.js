@@ -103,7 +103,7 @@ export const getUser = async (req, res) => {
 //Update User
 export const updateUserData = async (req, res) => {
 	const userId = req.user.id
-	const { arrayName, price } = req.body
+	const { arrayName, price, date } = req.body
 	try {
 		if (
 			!['products', 'me', 'wife', 'car', 'things', 'daughter'].includes(
@@ -114,7 +114,7 @@ export const updateUserData = async (req, res) => {
 			return res.status(400).json({ error: 'Некорректный тип массива' })
 		}
 
-		const updateObject = { $addToSet: { [arrayName]: { price } } }
+		const updateObject = { $addToSet: { [arrayName]: { price, date } } }
 
 		const user = await User.findByIdAndUpdate(userId, updateObject, {
 			new: true,
